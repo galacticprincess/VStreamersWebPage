@@ -1,0 +1,30 @@
+name: Deploy Website to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Set this to the branch you're using for development.
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron:  '0 */6 * * *'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'  # Set this to the node version you need (if any).
+
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages  # The branch the action should deploy to.
+          FOLDER: .  # The folder the action should deploy.
+          CLEAN: true  # Automatically remove deleted files from the deployment branch
