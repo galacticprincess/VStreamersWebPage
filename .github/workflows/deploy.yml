@@ -8,7 +8,7 @@ on:
     branches:
       - main
   schedule:
-    - cron:  '0 */6 * * *'
+    - cron:  '59 11 * * 5' # Cron job "At 11:59 on Friday."
 
 jobs:
   build-and-deploy:
